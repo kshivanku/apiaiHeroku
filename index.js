@@ -34,11 +34,11 @@ restService.post('/hook', function(req, res) {
 
   function setCompareNum(app){
     console.log("inside set compare num");
-    var compNum = app.getArgument("compNum");
+    var someName = app.getArgument("someName");
     var baseNum = app.getContextArgument("base-given", "baseNum");
-    console.log("compNum: " + compNum);
+    console.log("someName: " + someName);
     console.log("baseNum: " + baseNum);
-    if(baseNum > compNum) {
+    if(baseNum > 100) {
       app.tell("Your first number is bigger than the second number");
     }
     else{

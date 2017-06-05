@@ -28,7 +28,9 @@ restService.post('/hook', function(req, res) {
     console.log("Inside set base");
     //getArgument is to get something from the parameters
     var baseNum  = app.getArgument("baseNum");
-    app.setContext("base-given");
+    const parameters = {};
+    parameters["baseNum"] = baseNum;
+    app.setContext("base-given", 5, parameters);
     app.ask("Now give me the number that you want to compare " + baseNum + " with");
   }
 

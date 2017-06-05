@@ -17,10 +17,13 @@ restService.post('/hook', function(req, res) {
     request: req,
     response: res
   });
-  console.log(app.data);
+
   function anything(app){
     console.log("In anything function");
-    app.tell('do you want to say anything?');
+    var id  = app.getArgument("id");
+    console.log("id: " + id);
+
+    app.tell("I'll say just anything");
   }
 
   const actionMap = new Map();

@@ -22,13 +22,13 @@ restService.post('/hook', function(req, res) {
   function welcomeIntent(app){
     console.log("inside welcome");
     app.ask("Welcome to compare numbers game! Give me the first number");
+    app.setContext("base-given");
   }
 
   function setBaseNum(app){
     console.log("Inside set base");
     //getArgument is to get something from the parameters
     var baseNum  = app.getArgument("baseNum");
-    app.setContext("base-given");
     app.ask("Now give me the number that you want to compare " + baseNum + " with");
   }
 

@@ -10,24 +10,44 @@ restService.use(bodyParser.json());
 
 restService.post('/hook', function(req, res) {
   console.log('hook request');
-  // console.log("req.body: ");
-  // console.log(req.body);
+  console.log("req.body: ");
+  console.log(req.body);
 
+  //creating the APIAI app
   const app = new ApiAiApp({
     request: req,
     response: res
   });
 
-  function anything(app){
-    console.log("In anything function");
-    var any  = app.getArgument("anything-entity");
-    console.log("source: " + any);
+  function welcomeIntent(app){
+    console.log("inside welcome");
+    app.ask("Welcome to compare numbers game! Give me the first number");
+  }
 
-    app.tell("I'll say just anything");
+  function setBaseNum(app){
+    console.log("Inside set base");
+    //getArgument is to get something from the parameters
+    var baseNum  = app.getArgument("baseNum");
+    app.setContext("base-given");
+    app.ask("Now give me the number that you want to compare " + baseNum + " with");
+  }
+
+  function setCompareNum(app){
+    console.log("inside set compare num");
+    var compNum = app.getArgument("compNum");
+    var baseNum = app.getContextArgument("base-given", "baseNum");
+    if(baseNum > compNum) {
+      app.tell("Your first number is bigger than the second number");
+    }
+    else{
+      app.tell("Your second number is bigger than the first number");
+    }
   }
 
   const actionMap = new Map();
-  actionMap.set('any.thing', anything);
+  actionMap.set('input.welcome', welcomeIntent);
+  actionMap.set('set.baseNum', setBaseNum);
+  actionMap.set('set.compareNum', setCompareNum);
   app.handleRequest(actionMap);
 
   // try {

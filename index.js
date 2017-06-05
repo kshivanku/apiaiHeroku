@@ -10,22 +10,21 @@ restService.use(bodyParser.json());
 
 restService.post('/hook', function(req, res) {
   console.log('hook request');
-  console.log("req.body: ");
-  console.log(req.body);
+  // console.log("req.body: ");
+  // console.log(req.body);
 
   const app = new ApiAiApp({
     req: req,
     res: res
   });
-
+  console.log(app);
   function anything(app){
     console.log("In anything function");
-    console.log(app);
-    app.ask('do you want to say thing?');
+    app.tell('do you want to say anything?');
   }
 
   const actionMap = new Map();
-  actionMap.set('anything', anything);
+  actionMap.set('any.thing', anything);
   app.handleRequest(actionMap);
 
   // try {

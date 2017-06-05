@@ -20,7 +20,7 @@ restService.post('/hook', function(req, res) {
 
   function anything(app){
     console.log("In anything function");
-    var id  = app.getArgument("source");
+    var source  = app.getArgument("source");
     console.log("source: " + source);
 
     app.tell("I'll say just anything");

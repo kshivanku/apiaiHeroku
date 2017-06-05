@@ -10,8 +10,8 @@ restService.use(bodyParser.json());
 
 restService.post('/hook', function(req, res) {
   console.log('hook request');
-  console.log("req.body: ");
-  console.log(req.body);
+  // console.log("req.body: ");
+  // console.log(req.body);
 
   //creating the APIAI app
   const app = new ApiAiApp({
@@ -36,6 +36,8 @@ restService.post('/hook', function(req, res) {
     console.log("inside set compare num");
     var compNum = app.getArgument("compNum");
     var baseNum = app.getContextArgument("base-given", "baseNum");
+    console.log("compNum: " + compNum);
+    console.log("baseNum: " + baseNum);
     if(baseNum > compNum) {
       app.tell("Your first number is bigger than the second number");
     }

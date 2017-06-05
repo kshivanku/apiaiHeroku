@@ -21,6 +21,7 @@ restService.post('/hook', function(req, res) {
   function anything(app){
     console.log("In anything function");
     console.log(app);
+    app.ask('do you want to say thing?');
   }
 
   const actionMap = new Map();

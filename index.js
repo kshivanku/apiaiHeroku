@@ -14,10 +14,10 @@ restService.post('/hook', function(req, res) {
   // console.log(req.body);
 
   const app = new ApiAiApp({
-    req: req,
-    res: res
+    request: req,
+    response: res
   });
-  console.log(app);
+  console.log(app.data);
   function anything(app){
     console.log("In anything function");
     app.tell('do you want to say anything?');

@@ -1,3 +1,5 @@
+//This is a simple google assistant app that asks users for numbers as inputs and compares them.
+
 'use strict';
 
 const express = require('express');
@@ -29,7 +31,7 @@ restService.post('/hook', function(req, res) {
     //getArgument is to get something from the parameters
     var baseNum  = app.getArgument("baseNum");
 
-    //parameters need to be set while setting context
+    //parameters need to be set while setting context for the first time, after this all the parameters that are decided in subsequent conversations are automatically included in the parameter list.
     const parameters = {};
     parameters["baseNum"] = baseNum;
     app.setContext("base-given", 5, parameters);

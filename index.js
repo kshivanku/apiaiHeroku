@@ -39,7 +39,7 @@ restService.post('/hook', function(req, res) {
 
   function setCompareNum(app){
     console.log("inside set compare num");
-    var compareNum = app.getArgument("compNum");
+    var compNum = app.getArgument("compNum");
 
     //getContextArgument functions returns an object, the actual value is inside .value
     var baseNumObj = app.getContextArgument("base-given", "baseNum");

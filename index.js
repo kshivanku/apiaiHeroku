@@ -28,24 +28,30 @@ restService.post('/hook', function(req, res) {
     console.log("Inside set base");
     //getArgument is to get something from the parameters
     var baseNum  = app.getArgument("baseNum");
+
+    //parameters need to be set while setting context
     const parameters = {};
     parameters["baseNum"] = baseNum;
     app.setContext("base-given", 5, parameters);
+
     app.ask("Now give me the number that you want to compare " + baseNum + " with");
   }
 
   function setCompareNum(app){
     console.log("inside set compare num");
-    var someName = app.getArgument("someName");
+    var compareNum = app.getArgument("compNum");
+
+    //getContextArgument functions returns an object, the actual value is inside .value
     var baseNumObj = app.getContextArgument("base-given", "baseNum");
     var baseNum = baseNumObj.value;
-    console.log("someName: " + someName);
+
+    console.log("compNum: " + compNum);
     console.log("baseNum: " + baseNum);
-    if(baseNum > 100) {
-      app.tell("Your first number is bigger than the second number");
+    if(baseNum > compNum) {
+      app.tell("Your first number is bigger than the second number. Give me another number");
     }
     else{
-      app.tell("Your second number is bigger than the first number");
+      app.tell("Your second number is bigger than the first number. Give me another number");
     }
   }
 
@@ -54,44 +60,6 @@ restService.post('/hook', function(req, res) {
   actionMap.set('set.baseNum', setBaseNum);
   actionMap.set('set.compareNum', setCompareNum);
   app.handleRequest(actionMap);
-
-  // try {
-  //   var speech = 'empty speech';
-  //
-  //   if (req.body) {
-  //     var requestBody = req.body;
-  //
-  //     if (requestBody.result) {
-  //       speech = '';
-  //
-  //       if (requestBody.result.fulfillment) {
-  //         speech += requestBody.result.fulfillment.speech;
-  //         speech += ' ';
-  //       }
-  //
-  //       if (requestBody.result.action) {
-  //         speech += 'action: ' + requestBody.result.action;
-  //       }
-  //     }
-  //   }
-  //
-  //   console.log('result: ', speech);
-  //
-  //   return res.json({
-  //     speech: speech,
-  //     displayText: speech,
-  //     source: 'apiai-webhook-sample'
-  //   });
-  // } catch (err) {
-  //   console.error("Can't process request", err);
-  //
-  //   return res.status(400).json({
-  //     status: {
-  //       code: 400,
-  //       errorType: err.message
-  //     }
-  //   });
-  // }
 });
 
 restService.listen((process.env.PORT || 5000), function() {
